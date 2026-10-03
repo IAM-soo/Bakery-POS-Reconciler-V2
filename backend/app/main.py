@@ -1,11 +1,12 @@
 from contextlib import asynccontextmanager
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import FastAPI
 
 from app import models
 from app.config import settings
 from app.database import create_db_and_tables
-from app.routers import products
+from app.routers import products, reconciliation
 
 
 @asynccontextmanager
@@ -19,7 +20,21 @@ app = FastAPI(
     debug=settings.debug,
     lifespan=lifespan,
 )
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ],
+    allow_credentials=False,
+    allow_methods=["GET", "POST", "PATCH", "DELETE"],
+    allow_headers=["Content-Type"],
+)
+
+
 app.include_router(products.router)
+app.include_router(reconciliation.router)
+
 
 
 @app.get("/")

@@ -13,4 +13,4 @@ class PaymentMethod(str, Enum):
 class ReconciliationMode(str, Enum):
     POS_GT_CAT = "POS_GT_CAT"
     CAT_GT_POS = "CAT_GT_POS"
-    MATCHED = "MATCHED"
+    MATCH = "MATCH"

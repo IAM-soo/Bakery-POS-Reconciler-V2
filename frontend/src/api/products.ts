@@ -1,6 +1,6 @@
 import type { ProductCreate, ProductRead } from "../types/product"
 
-const API_URL = "http://127.0.0.1:800"
+const API_URL = "http://127.0.0.1:8000"
 
 export async function getProducts(): Promise<ProductRead[]> {
 
@@ -12,7 +12,7 @@ export async function getProducts(): Promise<ProductRead[]> {
     throw new Error("Failed to load products")
   }
   
-  const products = res.json()
+  const products = await res.json()
 
   return products
 
@@ -31,7 +31,7 @@ export async function createProduct(product_data: ProductCreate): Promise<Produc
     throw new Error("Failed to create product")
   }
 
-  const products = res.json()
+  const products = await res.json()
 
   return products
 
