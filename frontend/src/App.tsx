@@ -1,13 +1,12 @@
-
-import './App.css'
-import ProductList from './components/ProductList'
+import "./App.css";
+import ReconciliationForm from "./components/ReconciliationForm";
 
 function App() {
-
-
   return (
-    <ProductList/>
-  )
+    <>
+      <ReconciliationForm />
+    </>
+  );
 }
 
-export default App
+export default App;
