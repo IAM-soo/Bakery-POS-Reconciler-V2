@@ -217,7 +217,10 @@ export default function ReconciliationForm() {
 
   return (
     <div>
-      <details className="group mb-6 rounded-md border border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-900" open>
+      <details
+        className="group mb-6 rounded-md border border-zinc-300 bg-white dark:border-zinc-700 dark:bg-zinc-900"
+        open
+      >
         <summary className="cursor-pointer rounded-md px-4 py-3 text-sm font-semibold text-zinc-900 marker:text-zinc-400 group-open:rounded-b-none dark:text-zinc-100 dark:marker:text-zinc-600">
           使い方・注意事項
         </summary>
@@ -483,7 +486,7 @@ export default function ReconciliationForm() {
       {mismatches.length > 0 && (
         <section className="mt-8 border-t border-zinc-200 pt-5 dark:border-zinc-800">
           <h2 className="mb-4 text-lg font-semibold text-zinc-900 dark:text-zinc-100">
-            差額修正
+            差額修正ツール
           </h2>
 
           <div className="max-w-xl">
@@ -506,7 +509,49 @@ export default function ReconciliationForm() {
                 </option>
               ))}
             </select>
+            {selectedResult && (
+              <p className="mt-2 flex items-baseline justify-between gap-4 text-sm text-zinc-600 dark:text-zinc-400">
+                <span>差額</span>
+                <span className="font-semibold tabular-nums text-red-700 dark:text-red-400">
+                  ¥{selectedResult.difference.toLocaleString()}
+                </span>
+              </p>
+            )}
           </div>
+
+          {selectedResult?.mode === "POS_GT_CAT" && (
+            <div
+              className="mt-4 max-w-xl border-l-4 border-amber-500 bg-amber-50 px-4 py-3 dark:bg-amber-950/30"
+              role="status"
+            >
+              <p className="text-sm font-semibold text-amber-900 dark:text-amber-300">
+                POS側が多い
+              </p>
+              <p className="mt-1 text-sm leading-6 text-amber-900 dark:text-amber-200">
+                POSの注文履歴から差額より金額が多い取引を1つ選び、その金額を入力してください。
+              </p>
+            </div>
+          )}
+
+          {selectedResult?.mode === "CAT_GT_POS" && (
+            <div
+              className="mt-4 max-w-xl border-l-4 border-sky-500 bg-sky-50 px-4 py-3 dark:bg-sky-950/30"
+              role="status"
+            >
+              <p className="text-sm font-semibold text-sky-900 dark:text-sky-300">
+                CAT側が多い
+              </p>
+              <p className="mt-1 text-sm leading-6 text-sky-900 dark:text-sky-200">
+                POS側に差額分を追加できる可能性があります。
+              </p>
+              <p className="mt-1 text-sm leading-6 text-sky-900 dark:text-sky-200">
+                このまま候補検索を押してください。
+              </p>
+              <p className="mt-1 text-sm leading-6 text-sky-900 dark:text-sky-200">
+                合う候補がない場合は、POSで取消したい取引金額を入力してください。
+              </p>
+            </div>
+          )}
 
           {selectedResult && (
             <form
@@ -518,7 +563,7 @@ export default function ReconciliationForm() {
                   className="mb-1.5 block text-sm text-zinc-700 dark:text-zinc-300"
                   htmlFor="cancelled-amount"
                 >
-                  取消取引金額
+                  POSで一度取消したい取引の金額
                 </label>
                 <input
                   id="cancelled-amount"
@@ -530,14 +575,25 @@ export default function ReconciliationForm() {
                     setCancelAmount(Number(e.target.value))
                   }
                 />
+                {selectedResult?.mode === "POS_GT_CAT" &&
+                  cancelledAmount > 0 &&
+                  cancelledAmount <= selectedResult.difference && (
+                    <p className="mt-2 text-sm text-red-700 dark:text-red-400">
+                      取消金額が差額以下のため、この金額では修正できません。
+                    </p>
+                  )}
               </div>
 
               <button
                 className="h-10 rounded-md bg-zinc-900 px-5 text-sm font-semibold text-white transition hover:bg-zinc-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-900 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-950 dark:hover:bg-white dark:focus-visible:outline-zinc-100"
                 type="submit"
-                disabled={isSubmitting}
+                disabled={
+                  isSubmitting ||
+                  (selectedResult.mode === "POS_GT_CAT" &&
+                    cancelledAmount <= selectedResult.difference)
+                }
               >
-                {isSubmitting ? "検索中..." : "検索"}
+                {isSubmitting ? "検索中..." : "候補検索"}
               </button>
             </form>
           )}
