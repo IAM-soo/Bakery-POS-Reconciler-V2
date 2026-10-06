@@ -1,7 +1,7 @@
 export type ReconciliationMode =
-  | 'POS_GT_CAT'
-  | 'CAT_GT_POS'
-  | 'MATCH'
+  | "POS_GT_CAT"
+  | "CAT_GT_POS"
+  | "MATCH"
 
 export interface ReconcileRequest {
   pos_amounts: Record<string, number>
