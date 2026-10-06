@@ -25,7 +25,7 @@ app.add_middleware(
     allow_origins=[
         "http://localhost:5173",
         "http://127.0.0.1:5173",
-        "https://bakery-pos-reconciler-v2-backend.vercel.app",
+        "https://bakery-pos-reconciler-v2-frontend.vercel.app/",
     ],
     allow_credentials=False,
     allow_methods=["GET", "POST", "PATCH", "DELETE"],
