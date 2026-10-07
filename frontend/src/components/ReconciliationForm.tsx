@@ -293,7 +293,7 @@ export default function ReconciliationForm() {
               <div key={method} className="mt-4">
                 <label
                   htmlFor={`pos-${method}`}
-                  className="mb-1.5 block text-sm text-zinc-700 dark:text-zinc-300"
+                  className="mb-1.5 block text-sm text-zinc-800 dark:text-zinc-200"
                 >
                   {method}
                 </label>
