@@ -290,7 +290,7 @@ export default function ReconciliationForm() {
           </summary>
           <div className="border-t border-zinc-200 p-4 dark:border-zinc-800">
             {POS_METHODS.map((method) => (
-              <div key={method}>
+              <div key={method} className="mt-4">
                 <label
                   htmlFor={`pos-${method}`}
                   className="mb-1.5 block text-sm text-zinc-700 dark:text-zinc-300"
@@ -298,7 +298,7 @@ export default function ReconciliationForm() {
                   {method}
                 </label>
                 <input
-                  className="h-10 w-full rounded-md border border-zinc-300 bg-white px-3 text-right tabular-nums outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
+                  className="mt-1 h-10 w-full rounded-md border border-zinc-300 bg-white px-3 text-right tabular-nums outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
                   id={`pos-${method}`}
                   name={method}
                   min={0}
@@ -321,7 +321,7 @@ export default function ReconciliationForm() {
                 key={method}
                 className="min-h-36 border-b border-zinc-200 pb-4 dark:border-zinc-800"
               >
-                <div className="mb-2 flex items-center justify-between gap-3">
+                <div className="mt-4 mb-2 flex items-center justify-between gap-3">
                   <label
                     htmlFor={`cat-${method}-sales`}
                     className="text-sm font-medium text-zinc-800 dark:text-zinc-200"
@@ -343,7 +343,7 @@ export default function ReconciliationForm() {
 
                 <input
                   id={`cat-${method}-sales`}
-                  className="h-10 w-full rounded-md border border-zinc-300 bg-white px-3 text-right tabular-nums outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
+                  className="mt-1 h-10 w-full rounded-md border border-zinc-300 bg-white px-3 text-right tabular-nums outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
                   name={`${method}_sales`}
                   min={0}
                   type="number"
@@ -367,7 +367,7 @@ export default function ReconciliationForm() {
 
                     <input
                       id={`cat-${method}-cancel`}
-                      className="h-10 w-full rounded-md border border-red-200 bg-red-50 px-3 text-right tabular-nums outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 dark:border-red-900 dark:bg-red-950/40 dark:text-red-100 dark:focus:border-red-600 dark:focus:ring-red-950"
+                      className="mt-1 h-10 w-full rounded-md border border-red-200 bg-red-50 px-3 text-right tabular-nums outline-none transition focus:border-red-500 focus:ring-2 focus:ring-red-100 dark:border-red-900 dark:bg-red-950/40 dark:text-red-100 dark:focus:border-red-600 dark:focus:ring-red-950"
                       name={`${method}_cancel`}
                       min={0}
                       type="number"
@@ -430,7 +430,7 @@ export default function ReconciliationForm() {
                     <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
                       {result.method}
                     </span>
-                    <span className="text-sm font-semibold text-emerald-700">
+                    <span className="text-sm font-semibold text-emerald-400">
                       OK
                     </span>
                   </div>

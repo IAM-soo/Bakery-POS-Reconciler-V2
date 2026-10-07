@@ -10,7 +10,8 @@ export const POS_METHODS = [
 export const CAT_PAYMENT_GROUPS = {
   クレジットカード: ["クレジットカード"],
   交通系IC: ["交通系IC"],
-  JREポイント: ["JREポイント"],
+  電子マネー: ["楽天Edy", "iD", "QUICPay", "WAON", "nanaco"],
+  中国QR: ["Alipay", "WeChatPay"],
   国内QR: [
     "d払い",
     "PayPay",
@@ -19,6 +20,5 @@ export const CAT_PAYMENT_GROUPS = {
     "J-Coin Pay",
     "teppay",
   ],
-  中国QR: ["Alipay", "WeChatPay"],
-  電子マネー: ["楽天Edy", "iD", "QUICPay", "WAON", "nanaco"],
+  JREポイント: ["JREポイント"],
 } as const
