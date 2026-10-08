@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
 import ReconciliationForm from "./components/ReconciliationForm";
+import ProductForm from "./components/ProductForm";
 
 function App() {
+  const [page, setPage] = useState<"reconciliation" | "product">("reconciliation");
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
@@ -39,7 +41,25 @@ function App() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <ReconciliationForm />
+        <nav className="mb-6 flex gap-6 border-b border-zinc-200 dark:border-zinc-800" aria-label="ページ切替">
+          <button
+            type="button"
+            aria-current={page === "reconciliation" ? "page" : undefined}
+            onClick={() => setPage("reconciliation")}
+            className="border-b-2 border-transparent py-3 text-sm font-semibold text-zinc-500 hover:text-zinc-900 aria-[current=page]:border-emerald-600 aria-[current=page]:text-emerald-700 dark:text-zinc-400 dark:hover:text-zinc-100 dark:aria-[current=page]:text-emerald-400"
+          >
+            照合
+          </button>
+          <button
+            type="button"
+            aria-current={page === "product" ? "page" : undefined}
+            onClick={() => setPage("product")}
+            className="border-b-2 border-transparent py-3 text-sm font-semibold text-zinc-500 hover:text-zinc-900 aria-[current=page]:border-emerald-600 aria-[current=page]:text-emerald-700 dark:text-zinc-400 dark:hover:text-zinc-100 dark:aria-[current=page]:text-emerald-400"
+          >
+            商品登録
+          </button>
+        </nav>
+        {page === "reconciliation" ? <ReconciliationForm /> : <ProductForm />}
       </main>
     </div>
   );

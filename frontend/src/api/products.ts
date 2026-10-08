@@ -18,13 +18,13 @@ export async function getProducts(): Promise<ProductRead[]> {
 
 }
 
-export async function createProduct(product_data: ProductCreate): Promise<ProductRead> {
+export async function createProduct(payload: ProductCreate): Promise<ProductRead> {
   const res = await fetch(`${API_URL}/products/`, {
     method:"POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify(product_data)
+    body: JSON.stringify(payload)
   })
   
   if (!res.ok){

@@ -275,6 +275,7 @@ export default function ReconciliationForm() {
             </h3>
             <ul className="mt-1 list-disc space-y-1 pl-5 text-sm font-normal leading-6 text-amber-900 dark:text-amber-200">
               <li>まだテスト版です。</li>
+              <li>レシートを印刷してから使うのがおすすめです。</li>
               <li>
                 実際に修正する前に、必ずPOS画面とCAT端末の金額を再確認してください。
               </li>
