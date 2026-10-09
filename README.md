@@ -2,6 +2,10 @@
 
 パン屋のレジ締め作業を支援する Web アプリです。POS に記録された決済金額と CAT 端末の金額を照合し、差額がある場合は修正後の金額に一致する商品組み合わせ候補を提示します。
 
+## Live Demo
+
+[Bakery POS Reconciler V2 を開く](https://bakery-pos-reconciler-v2-frontend.vercel.app/)
+
 ## 開発の背景
 
 アルバイト先のパン屋では、レジ締め時に POS と CAT 端末の決済金額を確認する必要があります。POS は「電子マネー」「国内QR」「中国QR」などの分類合計を表示する一方、CAT 端末は楽天Edy、iD、PayPay、Alipay などのサービス別に金額を表示します。
