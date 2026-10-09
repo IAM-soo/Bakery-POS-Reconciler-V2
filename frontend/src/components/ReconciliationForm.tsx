@@ -556,10 +556,10 @@ export default function ReconciliationForm() {
 
           {selectedResult && (
             <form
-              className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-end"
+              className="mt-4 grid max-w-xl gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end"
               onSubmit={handleCorrectionSubmit}
             >
-              <div className="w-full sm:max-w-sm">
+              <div className="min-w-0">
                 <label
                   className="mb-1.5 block text-sm text-zinc-700 dark:text-zinc-300"
                   htmlFor="cancelled-amount"
@@ -596,6 +596,17 @@ export default function ReconciliationForm() {
               >
                 {isSubmitting ? "検索中..." : "候補検索"}
               </button>
+              {cancelledAmount > 0 && (
+                <p className="flex items-baseline justify-between gap-4 border-t border-zinc-200 pt-3 text-sm sm:col-span-2 dark:border-zinc-800" aria-live="polite">
+                  <span className="text-zinc-600 dark:text-zinc-400">目標金額</span>
+                  <span className="font-semibold tabular-nums text-zinc-900 dark:text-zinc-100">
+                    ￥{(selectedResult.mode === "POS_GT_CAT"
+                      ? cancelledAmount - selectedResult.difference
+                      : cancelledAmount + selectedResult.difference
+                    ).toLocaleString()}
+                  </span>
+                </p>
+              )}
             </form>
           )}
         </section>

@@ -25,17 +25,17 @@ export default function ProductForm() {
     null,
   );
 
-  const [products, setProducts] = useState<ProductRead|null>();
+  const [products, setProducts] = useState<ProductRead | null>(null);
 
   const dialogRef = useRef<HTMLDialogElement | null>(null);
 
-  function handleReset(){
-    setItemName("")
-    setPrice(0)
-    setSelectedProductCategory("")
-    setError(null)
-    setPendingProduct(null)
-    setProducts(null)
+  function handleReset() {
+    setItemName("");
+    setPrice(0);
+    setSelectedProductCategory("");
+    setError(null);
+    setPendingProduct(null);
+    setProducts(null);
   }
 
   function handlePreview(e: SubmitEvent<HTMLFormElement>) {
@@ -92,16 +92,16 @@ export default function ProductForm() {
     <div>
       <div>
         <form className="space-y-8 max-w-xl" onSubmit={handlePreview}>
-          <div className=" border-zinc-200 p-4 dark:border-zinc-800">
-            <div className="mt-4">
+          <div className="space-y-4 border-zinc-200 p-4 dark:border-zinc-800">
+            <div>
               <label
                 htmlFor="item-name"
-                className="mb-1.5 block text-sm text-zinc-800 dark:text-zinc-200"
+                className="mb-2 block text-sm text-zinc-800 dark:text-zinc-200"
               >
                 商品名
               </label>
               <input
-                className="mt-1 h-10 w-full rounded-md border border-zinc-300 bg-white px-3 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
+                className=" h-10 w-full rounded-md border border-zinc-300 bg-white px-3 outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
                 id="item-name"
                 type="text"
                 value={itemName}
@@ -112,15 +112,15 @@ export default function ProductForm() {
                 required
               />
             </div>
-            <div className="mt-4">
+            <div>
               <label
                 htmlFor="price"
-                className="mb-1.5 block text-sm text-zinc-800 dark:text-zinc-200"
+                className="mb-2 block text-sm text-zinc-800 dark:text-zinc-200"
               >
                 価格
               </label>
               <input
-                className="mt-1 h-10 w-full rounded-md border border-zinc-300 bg-white px-3 tabular-nums outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
+                className="h-10 w-full rounded-md border border-zinc-300 bg-white px-3 tabular-nums outline-none transition focus:border-emerald-600 focus:ring-2 focus:ring-emerald-100 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-100 dark:focus:border-emerald-500 dark:focus:ring-emerald-950"
                 id="price"
                 type="number"
                 value={price === 0 ? "" : price}
@@ -132,10 +132,10 @@ export default function ProductForm() {
                 required
               />
             </div>
-            <div className="mt-4">
+            <div>
               <label
                 htmlFor="product-category"
-                className="mb-1.5 block text-sm text-zinc-800 dark:text-zinc-200"
+                className="mb-2 block text-sm text-zinc-800 dark:text-zinc-200"
               >
                 商品分類
               </label>
@@ -159,13 +159,13 @@ export default function ProductForm() {
           </div>
           <div className="flex justify-end gap-3">
             <button
-            className="h-10 rounded-md border border-zinc-300 bg-white px-5 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
-            type="button"
-            disabled={isSubmitting}
-            onClick={handleReset}
-          >
-            リセット
-          </button>
+              className="h-10 rounded-md border border-zinc-300 bg-white px-5 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
+              type="button"
+              disabled={isSubmitting}
+              onClick={handleReset}
+            >
+              リセット
+            </button>
             <button
               className="h-10 min-w-32 rounded-md bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
               type="submit"
@@ -196,25 +196,55 @@ export default function ProductForm() {
         </div>
       )}
 
-      <dialog ref={dialogRef}>
-        <h2>商品登録確認</h2>
+      <dialog
+        className="m-auto w-[calc(100%-2rem)] max-w-md rounded-md p-6 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 backdrop:bg-black/50"
+        ref={dialogRef}
+      >
+        <h2 className="flex justify-center text-xl font-semibold">
+          商品登録確認
+        </h2>
         {pendingProduct && (
           <div>
-            <p>商品名：{pendingProduct.item_name}</p>
-            <p>価格：{pendingProduct.price.toLocaleString()}</p>
-            <p>
-              カテゴリ：
-              {
-                PRODUCT_CATEGORY.find(
-                  (item) => item.value === pendingProduct?.category,
-                )?.label
-              }
-            </p>
+            <dl className="space-y-3">
+              <div>
+                <dt className="text-sm text-zinc-500 dark:text-zinc-400">
+                  商品名：
+                </dt>
+                <dd className="text-base font-medium text-zinc-900 dark:text-zinc-100">
+                  {pendingProduct.item_name}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm text-zinc-500 dark:text-zinc-400">
+                  価格：
+                </dt>
+                <dd className="text-base font-medium tabular-nums text-zinc-900 dark:text-zinc-100">¥
+                  {pendingProduct.price.toLocaleString()}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-sm text-zinc-500 dark:text-zinc-400">
+                  カテゴリ：
+                </dt>
+                <dd className="text-base font-medium text-zinc-900 dark:text-zinc-100">
+                  {
+                    PRODUCT_CATEGORY.find(
+                      (item) => item.value === pendingProduct?.category,
+                    )?.label
+                  }
+                </dd>
+              </div>
+            </dl>
           </div>
         )}
-        <div>{error && <p>{error}</p>}</div>
-        <div>
+        <div className="flex justify-center mt-4">
+          {error && (
+            <p className="text-sm text-red-700 dark:text-red-400 ">{error}</p>
+          )}
+        </div>
+        <div className="flex justify-center gap-3 mt-6">
           <button
+            className="h-10 min-w-16 rounded-md border border-zinc-300 bg-white px-5 text-sm font-semibold text-zinc-700 transition hover:bg-zinc-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-zinc-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:bg-zinc-800"
             type="button"
             onClick={() => dialogRef.current?.close()}
             disabled={isSubmitting}
@@ -222,11 +252,12 @@ export default function ProductForm() {
             戻る
           </button>
           <button
+            className="h-10 min-w-16 rounded-md bg-emerald-700 px-5 text-sm font-semibold text-white transition hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 disabled:cursor-not-allowed disabled:opacity-50"
             type="button"
             onClick={handleProductCreate}
             disabled={isSubmitting}
           >
-            {isSubmitting ? "登録中" : "登録"}
+            {isSubmitting ? "登録中..." : "登録"}
           </button>
         </div>
       </dialog>
