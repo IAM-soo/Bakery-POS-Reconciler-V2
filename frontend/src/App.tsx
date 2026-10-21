@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 
 import ReconciliationForm from "./components/ReconciliationForm";
 import ProductForm from "./components/ProductForm";
+import ProductList from "./components/ProductList";
 
 function App() {
-  const [page, setPage] = useState<"reconciliation" | "product">("reconciliation");
+  const [page, setPage] = useState<
+    "reconciliation" | "productCreate" | "productList"
+  >("reconciliation");
   const [isDark, setIsDark] = useState(() => {
     const savedTheme = localStorage.getItem("theme");
 
@@ -41,7 +44,10 @@ function App() {
       </header>
 
       <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-        <nav className="mb-6 flex gap-6 border-b border-zinc-200 dark:border-zinc-800" aria-label="ページ切替">
+        <nav
+          className="mb-6 flex gap-6 border-b border-zinc-200 dark:border-zinc-800"
+          aria-label="ページ切替"
+        >
           <button
             type="button"
             aria-current={page === "reconciliation" ? "page" : undefined}
@@ -52,17 +58,35 @@ function App() {
           </button>
           <button
             type="button"
-            aria-current={page === "product" ? "page" : undefined}
-            onClick={() => setPage("product")}
+            aria-current={page === "productCreate" ? "page" : undefined}
+            onClick={() => setPage("productCreate")}
             className="border-b-2 border-transparent py-3 text-sm font-semibold text-zinc-500 hover:text-zinc-900 aria-[current=page]:border-emerald-600 aria-[current=page]:text-emerald-700 dark:text-zinc-400 dark:hover:text-zinc-100 dark:aria-[current=page]:text-emerald-400"
           >
             商品登録
           </button>
+          <button
+            type="button"
+            aria-current={page === "productList" ? "page" : undefined}
+            onClick={() => setPage("productList")}
+            className="border-b-2 border-transparent py-3 text-sm font-semibold text-zinc-500 hover:text-zinc-900 aria-[current=page]:border-emerald-600 aria-[current=page]:text-emerald-700 dark:text-zinc-400 dark:hover:text-zinc-100 dark:aria-[current=page]:text-emerald-400"
+          >
+            商品一覧
+          </button>
         </nav>
-        {page === "reconciliation" ? <ReconciliationForm /> : <ProductForm />}
+
+        {(() => {
+          switch (page) {
+            case "productList":
+              return <ProductList />;
+            case "productCreate":
+              return <ProductForm />;
+            default:
+              return <ReconciliationForm />;
+          }
+        })()}
       </main>
     </div>
   );
 }
 
-export default App
+export default App;
